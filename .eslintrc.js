@@ -3,7 +3,13 @@ module.exports = {
   parser: '@babel/eslint-parser',
   plugins: ['spellcheck'],
   rules: {
-    'spellcheck/spell-checker': ['warn'],
+    'spellcheck/spell-checker': ['warn',
+      {
+        'skipWords': [
+          'msg',
+        ],
+      }
+    ],
     'no-undef': 'off',
     'class-methods-use-this': 'off',
     'no-plusplus': 'off',

@@ -8,6 +8,15 @@ Then(/^User is on SwagLabs products page$/, async () => {
   });
 });
 
-When(/^User adds - "([^"]*)" to the shopping cart$/, async (productName) => {
+When(/^User adds - "([^"]*)" to the shopping cart$/, async (productTitle) => {
+  await ProductsPage.addProductToCart(productTitle);
+});
 
+When(/^User opens shopping cart$/, async () => {
+  await ProductsPage.cartButton.waitForDisplayed({
+    timeout: 5000,
+    timeoutMsg: 'Cart button was not found',
+  });
+
+  await ProductsPage.cartButton.click();
 });

@@ -12,11 +12,11 @@ Feature: SwagLabs feature file
       When User adds - "Sauce Labs Fleece Jacket" to the shopping cart
       And User opens shopping cart
       Then User sees product - "Sauce Labs Fleece Jacket" with price - "$49.99"
-      When User press checkout button # <==== LAST STEP DEFINED
-      And User fills the checkout information
-      And User press button to continue with the order
-      And User sees correct product details in checkout overview
-      And User press finish order button
-      Then User sees that order has been completed
-      And User goes back to the products page
-      And User is on SwagLabs products page
+      When User press checkout button
+      # And User fills the checkout information
+      # And User press button to continue with the order
+      # And User sees correct product details in checkout overview
+      # And User press finish order button
+      # Then User sees that order has been completed
+      # And User goes back to the products page
+      # And User is on SwagLabs products page
