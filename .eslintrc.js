@@ -7,6 +7,8 @@ module.exports = {
       {
         'skipWords': [
           'msg',
+          'Oleksandr',
+          'Datskevych',
         ],
       }
     ],
