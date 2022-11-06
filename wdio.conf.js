@@ -61,7 +61,14 @@ exports.config = {
         maxInstances: 1,
         //
         browserName: 'chrome',
-        acceptInsecureCerts: true
+        acceptInsecureCerts: true,
+        'cjson:metadata': {
+          device: 'Local testing machine',
+          platform: {
+            name: 'linux',
+            version: '5.18.14-arch1-1'
+          }
+        }
         // If outputDir is provided WebdriverIO can capture driver session logs
         // it is possible to configure which logTypes to include/exclude.
         // excludeDriverLogs: ['*'], // pass '*' to exclude all driver session logs
@@ -104,7 +111,7 @@ exports.config = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    baseUrl: 'http://https://www.saucedemo.com/',
+    baseUrl: 'http://www.saucedemo.com/',
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 10000,
@@ -341,6 +348,7 @@ exports.config = {
       generate({
         jsonDir: '.tmp/json/',
         reportPath: '.tmp/report/',
+        displayDuration: true,
       });
     },
     /**

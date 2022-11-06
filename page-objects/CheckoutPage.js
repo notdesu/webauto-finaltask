@@ -40,11 +40,11 @@ class CheckoutPage {
   }
 
   async validateCheckoutSummaryInfo(checkoutItem, summaryPayment, summaryShipping) {
-    const actualCheckoutSummaryShipping = await this.checkoutSummaryShipping.getText();
-    const actualCheckoutSummaryPayment = await this.checkoutSummaryPayment.getText();
     const actualCheckoutItemName = await this.checkoutItemName.getText();
+    const actualCheckoutSummaryPayment = await this.checkoutSummaryPayment.getText();
+    const actualCheckoutSummaryShipping = await this.checkoutSummaryShipping.getText();
 
-    // Sauce Labs Fleece Jacket
+    // Custom entered item name from feature file
     await expect(actualCheckoutItemName).toBe(checkoutItem);
     // SauceCard #31337
     await expect(actualCheckoutSummaryPayment).toBe(summaryPayment);

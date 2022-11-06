@@ -1,5 +1,9 @@
 class ProductsPage {
-  // span[class="title"]
+  constructor(itemGet, desiredItemName) {
+    this.itemGet = itemGet;
+    this.desiredItemName = desiredItemName;
+  }
+
   get productsPageTitle() {
     return $('span[class="title"]');
   }
@@ -8,33 +12,53 @@ class ProductsPage {
     return $$('div[class="inventory_item_name"]');
   }
 
-  get addToCartJacket() {
-    return $('button[id="add-to-cart-sauce-labs-fleece-jacket"]');
+  get addItemToCart() {
+    return $(this.itemGet);
+  }
+
+  /**
+   * @param {string} desiredItemName
+   */
+  set changeDesiredItemName(desiredItemName) {
+    this.desiredItemName = desiredItemName;
+    this.itemGet = `//div[@class="inventory_item_name" and contains(text(), "${desiredItemName}")]//following::button[1]`;
+  }
+
+  get desiredItem() {
+    return this.desiredItemName;
   }
 
   get cartButton() {
     return $('a[class="shopping_cart_link"]');
   }
 
-  async addProductToCart(productTitle) {
-    // const val = await this.productList.length;
-    // console.log(val);
+  get shoppingCartBadge() {
+    return $('span[class="shopping_cart_badge"]');
+  }
 
+  async addProductToCart(productTitle) {
     const productListLength = await this.productList.length;
     for (let i = 0; i < productListLength; i++) {
+      await this.productList[i].waitForDisplayed({
+        timeout: 5000,
+        timeoutMsg: 'Item in product list was not found',
+      });
+
       const productListItemTitle = await this.productList[i].getText();
       if (productListItemTitle === productTitle) {
-        await this.addToCartJacket.click();
+        this.changeDesiredItemName = productTitle;
+
+        await this.addItemToCart.waitForClickable({
+          timeout: 5000,
+          timeoutMsg: 'Add to cart button was not found',
+        });
+
+        await this.addItemToCart.click();
         return;
       }
     }
 
-    // throw new Error('Item was not found');
-
-    // const productList = await this.productList.$$('div[class="inventory_item"]');
-    // const actualProductTitle = await productList[3].$('div[class="inventory_item_name"')
-    //   .getText();
-    // await expect(actualProductTitle).toBe(productTitle);
+    throw new Error('Desired item was not found');
   }
 }
 

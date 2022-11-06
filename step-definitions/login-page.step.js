@@ -1,4 +1,4 @@
-import { Given, When, Then } from '@wdio/cucumber-framework';
+import { Given, When } from '@wdio/cucumber-framework';
 import LoginPage from '../page-objects/LoginPage';
 
 Given(/^User has opened SwagLabs website$/, async () => {
@@ -24,21 +24,10 @@ Given(/^User inputs password - "([^"]*)"$/, async (password) => {
 });
 
 When(/^User press the login button$/, async () => {
-  await LoginPage.loginButton.waitForDisplayed({
+  await LoginPage.loginButton.waitForClickable({
     timeout: 5000,
     timeoutMsg: 'Login button was not found',
   });
 
   await LoginPage.loginButton.click();
-});
-
-Then(/^User sees an error message - "([^"]*)"$/, async (errorMessage) => {
-  await LoginPage.checkErrorMessage(errorMessage);
-});
-
-Then(/^User is on SwagLabas home page$/, async () => {
-  await LoginPage.usernameInputField.waitForDisplayed({
-    timeout: 5000,
-    timeoutMsg: 'Input field on Home page was not found',
-  });
 });

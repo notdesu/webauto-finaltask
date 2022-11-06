@@ -7,7 +7,7 @@ class CartPage {
     return $('button[data-test="checkout"]');
   }
 
-  async validatePresenceOfJacketInCartList(productTitle, productPrice) {
+  async validatePresenceOfDesiredItemInCartList(productTitle, productPrice) {
     const cartList = await this.cartList.$$('div[class="cart_item"]');
 
     const actualProductTitle = await cartList[0].$('div[class="inventory_item_name"').getText();

@@ -13,16 +13,8 @@ class LoginPage extends Page {
     return $('input[id="login-button"]');
   }
 
-  get errorMessageContainer() {
-    return $('h3[data-test="error"]');
-  }
-
   async open() {
     await super.open('http://www.saucedemo.com/');
-  }
-
-  async checkErrorMessage(errorMessage) {
-    await expect(this.errorMessageContainer).toHaveText(errorMessage);
   }
 }
 

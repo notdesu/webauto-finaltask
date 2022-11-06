@@ -1,5 +1,6 @@
 import { When, Then } from '@wdio/cucumber-framework';
 import CheckoutPage from '../page-objects/CheckoutPage';
+import ProductsPage from '../page-objects/ProductsPage';
 
 When(/^User fills the checkout information$/, async () => {
   await CheckoutPage.firstNameInput.waitForDisplayed({
@@ -23,7 +24,7 @@ When(/^User fills the checkout information$/, async () => {
 });
 
 When(/^User press button to continue with the order$/, async () => {
-  await CheckoutPage.continueButton.waitForDisplayed({
+  await CheckoutPage.continueButton.waitForClickable({
     timeout: 5000,
     timeoutMsg: 'Continue button was not found',
   });
@@ -48,14 +49,14 @@ When(/^User sees correct product details in checkout overview$/, async () => {
   });
 
   await CheckoutPage.validateCheckoutSummaryInfo(
-    'Sauce Labs Fleece Jacket',
+    ProductsPage.desiredItem,
     'SauceCard #31337',
     'FREE PONY EXPRESS DELIVERY!',
   );
 });
 
 When(/^User press finish order button$/, async () => {
-  await CheckoutPage.finishButton.waitForDisplayed({
+  await CheckoutPage.finishButton.waitForClickable({
     timeout: 5000,
     timeoutMsg: 'Finish button was not found',
   });
@@ -64,11 +65,16 @@ When(/^User press finish order button$/, async () => {
 });
 
 Then(/^User sees that order has been completed$/, async () => {
+  await CheckoutPage.checkoutCompletionText.waitForDisplayed({
+    timeout: 5000,
+    timeoutMsg: 'Checkout completion text was not found',
+  });
+
   await CheckoutPage.validateCompletionOfOrder();
 });
 
 Then(/^User goes back to the products page$/, async () => {
-  await CheckoutPage.backHomeButton.waitForDisplayed({
+  await CheckoutPage.backHomeButton.waitForClickable({
     timeout: 5000,
     timeoutMsg: 'Back home button was not found',
   });
